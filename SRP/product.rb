@@ -7,11 +7,11 @@ class Product
     @all ||= []
   end
 
-  def initialize(columns)
-    @name = columns[0]
-    @description = columns[1]
-    @cost = columns[2]
-    @inventory = columns[3]
+  def initialize(name, description, cost, inventory)
+    @name = name
+    @description = description
+    @cost = cost
+    @inventory = inventory
   end
 
   def price
@@ -43,10 +43,12 @@ end
 
 
 if __FILE__ == $0
-  ProductImporter.new.import_products <<-eos.gsub(/^ {4}/, '')
+  importer = ProductImporter.new <<-eos.gsub(/^ {4}/, '')
     mop, a tool for cleaning, 4.00, 100
     shiny tool, a tool for playing, 2.00, 200
   eos
+
+  importer.import
 
   puts "All Products:"
   ap Product.all

@@ -15,7 +15,7 @@ RSpec.describe ProductImporter, '.import_products' do
       eos
     }
 
-    subject{ ProductImporter.new.import_products(csv) }
+    subject{ ProductImporter.new(csv).import }
 
     it "creates a product for each row" do
       subject

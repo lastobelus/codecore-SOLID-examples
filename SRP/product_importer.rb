@@ -1,11 +1,16 @@
 class ProductImporter
+  attr_reader :csv
 
-  def import_products(csv)
+  def initialize(csv)
+    @csv = csv
+  end
+
+  def import
     csv.each_line do |product_line|
-      columns = product_line.chomp.split(/ *, */)
-      columns[2] = columns[2].to_f
-      columns[3] = columns[3].to_i
-      Product.all << Product.new(columns)
+      name, description, cost, inventory = product_line.chomp.split(/ *, */)
+      cost = cost.to_f
+      inventory = inventory.to_i
+      Product.all << Product.new(name, description, cost, inventory)
     end
   end
 

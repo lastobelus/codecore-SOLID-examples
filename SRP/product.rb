@@ -14,6 +14,10 @@ class Product
     @inventory = args[:inventory] || 0
   end
 
+  def create
+    Product.all << self
+  end
+
   def price
     cost * 2
   end

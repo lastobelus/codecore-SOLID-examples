@@ -15,7 +15,8 @@ class ProductImporter
       attrs = Hash[headers.zip(columns)]
       attrs[:cost] = attrs[:cost].to_f
       attrs[:inventory] = attrs[:inventory].to_i
-      Product.all << Product.new(attrs)
+      product = Product.new(attrs)
+      product.create
     end
   end
 

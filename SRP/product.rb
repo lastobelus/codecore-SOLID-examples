@@ -54,6 +54,22 @@ if __FILE__ == $0
 
   importer.import
 
+  wonky_importer = WonkyOrderProductImporter.new <<-eos.gsub(/^ {4}/, '')
+    Acme, B104, a tool for cleaning, 3.00, broom, 100
+    ToysCo, T90, a fun toy for playing, 1.00, fun toy, 100
+  eos
+
+  wonky_importer.import
+
+  xml_importer = XMLProductImporter.new <<-eos.gsub(/^ {4}/, '')
+    meat, <desc>a product for eating</desc>, 1.00, 100
+    ball, <desc>a thing for bouncing</desc>, 0.5, 200
+  eos
+
+  xml_importer.import
+
+
+
   puts "All Products:"
   ap Product.all
 

@@ -1,5 +1,5 @@
 require 'awesome_print'
-
+require_relative 'product_importer'
 class Product
   attr_accessor :name, :description, :cost, :inventory
 
@@ -12,15 +12,6 @@ class Product
     @description = columns[1]
     @cost = columns[2]
     @inventory = columns[3]
-  end
-
-  def self.import_products(csv)
-    csv.each_line do |product_line|
-      columns = product_line.chomp.split(/ *, */)
-      columns[2] = columns[2].to_f
-      columns[3] = columns[3].to_i
-      all << new(columns)
-    end
   end
 
   def price
@@ -52,7 +43,7 @@ end
 
 
 if __FILE__ == $0
-  Product.import_products <<-eos.gsub(/^ {4}/, '')
+  ProductImporter.new.import_products <<-eos.gsub(/^ {4}/, '')
     mop, a tool for cleaning, 4.00, 100
     shiny tool, a tool for playing, 2.00, 200
   eos

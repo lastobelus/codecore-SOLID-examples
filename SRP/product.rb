@@ -7,11 +7,11 @@ class Product
     @all ||= []
   end
 
-  def initialize(name, description, cost, inventory)
-    @name = name
-    @description = description
-    @cost = cost
-    @inventory = inventory
+  def initialize(args)
+    @name = args[:name]
+    @description = args[:description]
+    @cost = args[:cost]
+    @inventory = args[:inventory] || 0
   end
 
   def price

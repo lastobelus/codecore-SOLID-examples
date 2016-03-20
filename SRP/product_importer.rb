@@ -5,12 +5,17 @@ class ProductImporter
     @csv = csv
   end
 
+  def headers
+    [:name, :description, :cost, :inventory]
+  end
+
   def import
     csv.each_line do |product_line|
-      name, description, cost, inventory = product_line.chomp.split(/ *, */)
-      cost = cost.to_f
-      inventory = inventory.to_i
-      Product.all << Product.new(name, description, cost, inventory)
+      columns = product_line.chomp.split(/ *, */)
+      attrs = Hash[headers.zip(columns)]
+      attrs[:cost] = attrs[:cost].to_f
+      attrs[:inventory] = attrs[:inventory].to_i
+      Product.all << Product.new(attrs)
     end
   end
 

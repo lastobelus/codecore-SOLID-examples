@@ -9,7 +9,11 @@ RSpec.describe Product, 'creation' do
   end
 
   it "initializes from args" do
-    product = Product.new( "name", "desc", 1.5, 100
+    product = Product.new(
+      name: "name",
+      description: "desc",
+      cost: 1.5,
+      inventory: 100
     )
     expect(product.name).to eq("name")
     expect(product.description).to eq("desc")
